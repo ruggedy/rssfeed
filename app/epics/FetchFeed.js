@@ -17,6 +17,7 @@ import { catchError } from 'rxjs/operators/catchError';
 
 import RssFetch from '../services/rssFetch';
 
+// this epic controls the fetching of rss feeds on url input enter.
 
 export default ($actions, store) => 
     $actions.ofType(FETCH_FEED_INIT).pipe(

@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators/switchMap';
 import { map } from 'rxjs/operators/map';
 
 
-// Select a feed if one already exists but none ius selected
+// This epic controls how long the error message lasts for on screen.
 
 const CLOSE_DELAY = 5000; // Value in ms
 export default $actions => 

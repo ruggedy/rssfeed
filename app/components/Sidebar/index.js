@@ -31,6 +31,7 @@ export default class Sidebar extends PureComponent {
 		event.stopPropagation();
 		this.props.onRemoveFeed(url);
 	}
+	
     renderFeeds = (item) => <ListItem 
         key={item.url} 
 		item={item}
@@ -42,7 +43,7 @@ export default class Sidebar extends PureComponent {
         return(
             <div className="sidebar-container">
                 <div className="top">
-                    <Input onChange={this.onInputChange} /> 
+                    <Input ref={ref => this._inputRef = ref} onChange={this.onInputChange} /> 
                     <Button onClick={this.onSearch}/>
                 </div>
                 <ul className="bottom">
