@@ -6,6 +6,7 @@ import ListItem from './ListItem';
 import './index.scss';
 
 const noop = () => {}
+
 export default class Sidebar extends PureComponent {
     constructor(props){
         super(props)
@@ -24,12 +25,18 @@ export default class Sidebar extends PureComponent {
     
     onSearch = () => this.props.onSearch(this._inputValue)
 
-    onSelectedFeed = url => event => this.props.onSelectedFeed(url)
-
+	onSelectedFeed = url => event => this.props.onSelectedFeed(url)
+	
+	onRemoveFeed = url => event => {
+		event.stopPropagation();
+		this.props.onRemoveFeed(url);
+	}
     renderFeeds = (item) => <ListItem 
         key={item.url} 
-        item={item} 
-        onClick={this.onSelectedFeed(item.url)} />
+		item={item}
+		selected={this.props.selectedFeed === item.url} 
+        onClick={this.onSelectedFeed(item.url)} 
+		onRemove={this.onRemoveFeed(item.url)}/>
 
     render(){
         return(

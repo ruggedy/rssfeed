@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   devtool: 'cheap-module-eval-source-map',
@@ -130,6 +131,10 @@ const config = {
   },
 
   plugins: [
+	new HtmlWebpackPlugin({
+		template: "index.html",
+		inject : "body"
+	}),
     new webpack.LoaderOptionsPlugin({
       test: /\.js$/,
       options: {

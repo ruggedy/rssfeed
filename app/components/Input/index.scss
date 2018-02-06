@@ -1,0 +1,17 @@
+.sidebar-input {
+	display: block;
+	margin: 0;
+	padding: 12px 18px;
+	flex: 1;
+	color: #424242;
+	font-size: 18px;
+	line-height: 25px;
+	border: none;
+	border-radius: 5px;
+	transition: box-shadow 0.5s;
+
+	&:focus {
+		box-shadow: 2px 4px 5px #BDBDBD;
+		outline: none;
+	}
+}

@@ -2,7 +2,9 @@ import {
     FETCH_FEED_FAILURE, 
     FETCH_FEED_INIT, 
     FETCH_FEED_SUCCESS,
-    SELECTED_FEED } from './constants';
+	SELECTED_FEED,
+	REMOVE_FEED
+ } from './constants';
 // fetch actions 
 
 export const fetchFeedInit = (payload) => ({
@@ -23,6 +25,11 @@ export const fetchFeedFailure = (payload) => ({
 export const selectedFeed = (payload) => ({
     type: SELECTED_FEED,
     payload
+})
+
+export const removeFeed = (payload) => ({
+	type: REMOVE_FEED,
+	payload
 })
 
 

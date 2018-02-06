@@ -10,6 +10,8 @@ import configureStore from './config/configureStore'
 
 const { store, persistor } = configureStore()
 
+// persistor.purge()
+
 const render = (Component) => {
     ReactDOM.render(
     <AppContainer>

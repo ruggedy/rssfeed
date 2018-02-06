@@ -14,10 +14,10 @@
 .feeds-item {
     display: flex;
     flex-direction: column;
-    height: 200px;
+    min-height: 200px;
     margin-bottom: 50px;
     border-radius: 5px;
-    box-shadow: 2px 0px 2px #000000, 0px -2px 2px #000000;
+	box-shadow: 0 4px 5px 0 rgba(0,0,0,0.07), 0 1px 10px 0 rgba(0,0,0,0.06), 0 2px 4px -1px rgba(0,0,0,0.15);
     &:last-of-type {
         margin-bottom: 0;
     }
@@ -27,7 +27,17 @@
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
-        height: 50px;
+		height: 50px;
+		position: relative;
+		
+		&:after {
+			content: " ";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			border: 1px solid #F5F5F5;
+		}
 
         h3 {
             -webkit-margin-before: 0;
@@ -35,6 +45,10 @@
             -webkit-margin-start: 0px;
             -webkit-margin-end: 0px;
         }
-    }
+	}
+	
+	.body {
+		padding: 20px;
+	}
 }
 

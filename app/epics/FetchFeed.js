@@ -1,4 +1,9 @@
-import { FETCH_FEED_INIT, FETCH_FEED_FAILURE, FETCH_FEED_SUCCESS } from '../actions/constants';
+import { 
+	FETCH_FEED_INIT, 
+	FETCH_FEED_FAILURE, 
+	FETCH_FEED_SUCCESS,
+	ERROR_INIT
+ } from '../actions/constants';
 
 import { fromPromise } from 'rxjs/observable/fromPromise';
 import { empty } from 'rxjs/observable/empty';
@@ -13,23 +18,29 @@ import { catchError } from 'rxjs/operators/catchError';
 import RssFetch from '../services/rssFetch';
 
 
-export default $actions => 
+export default ($actions, store) => 
     $actions.ofType(FETCH_FEED_INIT).pipe(
         map(action => action.payload),
-        switchMap(payload => fromPromise(RssFetch(payload)).pipe(
-            mergeMap(res => {
-                // console.log(res
-                
-                if(res.status === 'error'){
-                    return _throw(res)
-                }
+        switchMap(url => {
+			const { feeds } = store.getState().RssFeed;
+			console.log(feeds[url]);
+			if(feeds[url]){
+				const error = new Error("Feed already exists");
+				return of({type: ERROR_INIT, error})
+			} 
+			return fromPromise(RssFetch(url)).pipe(
+				mergeMap(res => {
+					
+					if(res.status === 'error'){
+						return _throw(res);
+					}
 
-                const { feed, items } = res
-                return of({type: FETCH_FEED_SUCCESS, payload: {feed, items}})
-            }),
-            catchError( error => {
-                console.log(error.message);
-                return of({type: FETCH_FEED_FAILURE, error})
-            })
-        ))
-    )
+					const { feed, items } = res;
+					return of({type: FETCH_FEED_SUCCESS, payload: {feed, items}})
+				}),
+				catchError( error => {
+					return of({type: FETCH_FEED_FAILURE, error})
+				})
+			);
+		}),
+    );
